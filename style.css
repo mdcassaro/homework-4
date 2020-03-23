@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+.danger{
+    color: red;
+    font-weight: bold        
+}
 
 body{
     background-color: #eeeeee;

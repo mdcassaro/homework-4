@@ -1,6 +1,5 @@
 
-//change buttons to purple
-//add timer in corner
+
 //need intial page
 
 function Question(text, choices, answer){
@@ -14,7 +13,6 @@ function Quiz(questions){
     this.questions = questions;
     this.questionIndex = 0;
 }
-
 
 
 var questions = [
@@ -38,13 +36,36 @@ Question.prototype.correctAnswer = function(choices) {
 }
 
 Quiz.prototype.guess = function(answer){
-    this.questionIndex++;
-
+        
     if(this.getQuestionIndex().correctAnswer(answer)) {
         this.score++;
     }
+    this.questionIndex++;
 
 }
+
+var ONE_SECOND = 1000;
+var FIFTEEN_SECONDS = 15 * ONE_SECOND;
+
+
+var secondsLeft = 30;
+
+var timerId = setInterval(function(){
+    console.log("1 second has passed")
+    //this happens every second
+    secondsLeft--;
+    console.log(secondsLeft);
+    $("#timer-text").text(secondsLeft + " seconds left") 
+    if(secondsLeft <= 0 ){
+        clearInterval(timerId);
+    }
+
+}, ONE_SECOND);
+
+setTimeout(function(){
+    $("#timer-text").addClass("danger");
+}, FIFTEEN_SECONDS);
+
 function showScores(){
     var gameOverHTML = "<h1>Results</h1>";
     gameOverHTML += "<h2 id='score'>Your scores: " + quiz.score  + "</h2>";
@@ -55,19 +76,21 @@ function showScores(){
 function populate(){
     if(quiz.isEnded()){
         showScores();
-    }
-    else {
+    }else {
         //show question
         var element = document.getElementById("question");
         element.innerHTML = quiz.getQuestionIndex().text;
 
         // show choices
         var choices = quiz.getQuestionIndex().choices;
+
         for( var i = 0; i< choices.length; i++){
             var element = document.getElementById("choice" + i);
             element.innerHTML = choices[i];
             guess("btn" + i, choices[i]);
         }
+
+        showProgress();
 
     }
 
@@ -81,6 +104,12 @@ function guess(id, guess){
     }
 }
 
+function showProgress(){
+    var currentQuestionNumber = quiz.questionIndex + 1;
+    var element = document.getElementById("progress");
+    element.innerHTML = "Question " + currentQuestionNumber + "of " + quiz.questions.length;
+
+}
 
 
 
