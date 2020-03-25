@@ -2,6 +2,9 @@
 
 //need intial page
 
+
+
+
 function Question(text, choices, answer){
     this.text=text;
     this.choices = choices
@@ -66,16 +69,19 @@ setTimeout(function(){
     $("#timer-text").addClass("danger");
 }, FIFTEEN_SECONDS);
 
-function showScores(){
+function create(){
+    window.location = 'highscore.html';
     var gameOverHTML = "<h1>Results</h1>";
-    gameOverHTML += "<h2 id='score'>Your scores: " + quiz.score  + "</h2>";
     var element = document.getElementById("quiz");
-    element.innerHTML = gameOverHTML;       
+    element.innerHTML = gameOverHTML;
+    
+    
+           
 }
 
 function populate(){
     if(quiz.isEnded()){
-        showScores();
+        create();
     }else {
         //show question
         var element = document.getElementById("question");
@@ -110,10 +116,11 @@ function showProgress(){
     element.innerHTML = "Question " + currentQuestionNumber + "of " + quiz.questions.length;
 
 }
+var score = document.getElementById(score)
 
 
 
-
+//gigure this out maybe use jQuery data.
 
 
 var quiz = new Quiz (questions);

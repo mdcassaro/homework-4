@@ -25,7 +25,7 @@ var timerId = setInterval(function(){
     //this happens every second
     secondsLeft--;
     console.log(secondsLeft);
-    $("#timer-text").text(secondsLeft + " seconds left") 
+    $("#timer-left").text(secondsLeft + " seconds left") 
     if(secondsLeft <=0){
         clearInterval(timerId);
     }
@@ -42,4 +42,4 @@ setTimeout(function(){
 //         font-weight: bold
 //     }
 // </style> */
-//put in style in head
+//put
